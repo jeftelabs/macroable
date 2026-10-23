@@ -1,0 +1,98 @@
+{
+	"name": "@jeftelabs/macroable",
+	"version": "1.0.0",
+	"description": "Extend classes from outside in using Macros and getters",
+	"main": "build/index.js",
+	"type": "module",
+	"files": [
+		"build",
+		"!build/bin",
+		"!build/tests"
+	],
+	"exports": {
+		".": "./build/index.js"
+	},
+	"scripts": {
+		"pretest": "npm run lint",
+		"test": "npm run quick:test",
+		"lint": "eslint",
+		"format": "prettier --write .",
+		"typecheck": "tsc --noEmit",
+		"precompile": "npm run lint",
+		"compile": "tsup-node && tsc --emitDeclarationOnly --declaration",
+		"build": "npm run compile",
+		"version": "npm run build",
+		"prepublishOnly": "npm run build",
+		"release": "release-it",
+		"quick:test": "node --import=@jeftelabs/exec --enable-source-maps bin/test.ts",
+		"prepare": "husky",
+		"commitlint": "commitlint --edit",
+		"commit": "cz"
+	},
+	"keywords": [
+		"macroable"
+	],
+	"author": "jeftelabs <jeftelabs@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"@arapucajs/eslint-config": "^1.1.2",
+		"@arapucajs/prettier": "^1.1.1",
+		"@arapucajs/tsconfig": "^1.0.0",
+		"@jeftelabs/exec": "^1.0.1",
+		"@swc/core": "^1.15.18",
+		"@t8ngs/assert": "^1.0.0",
+    "@t8ngs/expect-type": "^1.2.0",
+		"@t8ngs/runner": "^1.0.0",
+		"@types/node": "^25.5.0",
+		"c8": "^11.0.0",
+		"commitizen": "^4.3.2",
+		"cz-conventional-changelog": "^3.3.0",
+		"husky": "^9.1.7",
+		"prettier": "^3.8.1",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jeftelabs/macroable.git"
+	},
+	"bugs": {
+		"url": "https://github.com/jeftelabs/macroable/issues"
+	},
+	"homepage": "https://github.com/jeftelabs/macroable#readme",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"tsup": {
+		"entry": [
+			"./index.ts"
+		],
+		"outDir": "./build",
+		"clean": true,
+		"format": "esm",
+		"dts": false,
+		"sourcemap": false,
+		"target": "esnext"
+	},
+	"c8": {
+		"reporter": [
+			"text",
+			"html"
+		],
+		"exclude": [
+			"tests/**"
+		]
+	},
+	"prettier": "@arapucajs/prettier",
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	},
+	"husky": {
+		"hooks": {
+			"prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+		}
+	}
+}
