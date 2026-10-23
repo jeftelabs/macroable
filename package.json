@@ -41,7 +41,7 @@
 		"@jeftelabs/exec": "^1.0.1",
 		"@swc/core": "^1.15.18",
 		"@t8ngs/assert": "^1.0.0",
-    "@t8ngs/expect-type": "^1.2.0",
+		"@t8ngs/expect-type": "^1.2.0",
 		"@t8ngs/runner": "^1.0.0",
 		"@types/node": "^25.5.0",
 		"c8": "^11.0.0",
